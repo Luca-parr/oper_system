@@ -1,3 +1,4 @@
+git init
 git add ~luca/operating_system/
 git commit -m "new commit"
 git push

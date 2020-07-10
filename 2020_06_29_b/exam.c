@@ -52,6 +52,7 @@ int main () {
 			sem_wait(shm_sem);
 			printf("parent writes!\n");
 			memcpy( shm_num, &num, sizeof(int));
+			sleep(5);
 			printf("parent_done\n");
 			sem_post(shm_sem);
 		
@@ -76,11 +77,14 @@ int main () {
 					memcpy( &num, shm_num, sizeof(int));
 					if(num== -1){
 						printf("child %d says it is already num = %d\n", getpid(), num);
+						sleep(5);
+						printf("child %d done\n", getpid());
 						sem_post(shm_sem);
 					} else {
 						printf("child %d says num = %d so he is gonna change to -1\n", getpid(), num);
 						num=-1;
 						memcpy( shm_num, &num, sizeof(int));
+						sleep(5);
 						sem_post(shm_sem);
 						printf("child %d exiting\n", getpid());
 						exit(0);
@@ -88,6 +92,7 @@ int main () {
 					}
 				}
 			}else{
+				sleep(5);
 				printf("first child done\n");
 
 			}
